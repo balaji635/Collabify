@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
+=======
+
+node_modules/
+.env
+dist/
+build/
+>>>>>>> 52170fe (Add .gitignore to ignore env, node_modules, dist, build)

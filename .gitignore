@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 1) Ignore server artifacts
 /server/node_modules/
 /server/.env
@@ -9,3 +10,21 @@
 # (Optional) If you ever rename the folder, you can use:
 /client/**/node_modules/
 /client/**/.env
+=======
+# === General ===
+node_modules/
+.env
+.DS_Store
+
+# === Client ===
+client/teamx-frontend/node_modules/
+client/teamx-frontend/.env
+client/teamx-frontend/dist/
+client/teamx-frontend/build/
+
+# === Server ===
+server/node_modules/
+server/.env
+server/dist/
+server/build/
+>>>>>>> 52170fe (Add .gitignore to ignore env, node_modules, dist, build)
