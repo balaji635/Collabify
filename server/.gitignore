@@ -1,7 +1,7 @@
-# Server ignores
+# Server
 /server/node_modules/
 /server/.env
 
-# Client ignores
+# Client
 /client/node_modules/
 /client/.env
