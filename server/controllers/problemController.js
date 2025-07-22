@@ -20,6 +20,7 @@ exports.createStatement = async (req, res) => {
     return res.status(400).json({ success: false, message: "All fields are required." });
   }
 
+<<<<<<< HEAD
   try {
     // 2️⃣ Use the same `Problem` reference here:
     const problem = new Problem({
@@ -39,6 +40,26 @@ exports.createStatement = async (req, res) => {
     return res.status(500).json({ success: false, message: err.message });
   }
 };
+=======
+  const existingTeam = await Problem.findOne({ teamName: teamName.toUpperCase() });
+if (existingTeam) {
+  return res.status(400).json({ success: false, message: "Team with this name already exists." });
+}
+
+const problem = new Problem({
+  hackathonName,
+  teamName: teamName.toUpperCase(),
+  membersRequired,
+  registrationDeadline,
+  skillsRequired,
+  description,
+  createdBy: userID
+});
+
+await problem.save();
+return res.status(201).json({ success: true, data: problem });
+}
+>>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
 
 exports.getAllProblems = async (req, res) => {
   try {
