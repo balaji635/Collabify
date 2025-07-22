@@ -5,18 +5,6 @@ import { AppContext } from '../context/AppContext';
 
 export default function NavBar() {
   const { isLogin, logout } = useContext(AppContext);
-<<<<<<< HEAD
-  return (
-    <nav>
-      {isLogin ? (
-        <>
-          <Link to="/">Home</Link> | <Link to="/post">Post Team</Link> | 
-          <button onClick={logout}>Logout</button>
-        </>
-      ) : (
-        <Link to="/login">Login</Link>
-      )}
-=======
 
   return (
     <nav className="bg-gray-900 text-white shadow-md">
@@ -47,7 +35,6 @@ export default function NavBar() {
           )}
         </div>
       </div>
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
     </nav>
   );
 }

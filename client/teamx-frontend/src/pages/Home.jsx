@@ -10,16 +10,9 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       try {
-<<<<<<< HEAD
-        const res = await axios.get(
-          `${backendURL}/problem/all`,
-          { withCredentials: true }
-        );
-=======
         const res = await axios.get(`${backendURL}/problem/all`, {
           withCredentials: true,
         });
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
         console.log("Fetch /problem/all response:", res.data);
         if (res.data.success && Array.isArray(res.data.data)) {
           setProblems(res.data.data);
@@ -34,34 +27,6 @@ export default function Home() {
     })();
   }, [backendURL]);
 
-<<<<<<< HEAD
-  if (loading) return <p>Loading...</p>;
-
-  if (!Array.isArray(problems) || problems.length === 0) {
-    return <p>No posts yet.</p>;
-  }
-
-  return (
-    <div>
-      <h2>All Hackathon Posts</h2>
-      <ul>
-        {problems.map((p) => (
-          <li key={p._id}>
-            <strong>{p.hackathonName}</strong> — {p.teamName}
-            <br />
-            Members: {p.membersRequired}
-            <br />
-            Deadline:{" "}
-            {new Date(p.registrationDeadline).toLocaleDateString()}
-            <br />
-            Skills: {p.skillsRequired.join(", ")}
-            <br />
-            {p.description}
-            <hr />
-          </li>
-        ))}
-      </ul>
-=======
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64 text-gray-600 text-xl">
@@ -116,7 +81,6 @@ export default function Home() {
           </div>
         ))}
       </div>
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
     </div>
   );
 }

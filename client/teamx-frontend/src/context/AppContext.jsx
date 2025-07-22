@@ -43,18 +43,11 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     checkLogin();
   }, []);
-<<<<<<< HEAD
-const value={
-      isLogin, userData, setIsLogin, setUserData,
-      logout, checkLogin, backendURL, loading
-    }
-=======
 const value = {
   isLogin, userData, setIsLogin, setUserData,
   logout, checkLogin, backendURL, loading
 }
 
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
   return (
     <AppContext.Provider value={value}>
       {children}

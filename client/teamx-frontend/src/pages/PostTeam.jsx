@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-// pages/PostTeam.jsx
-import { useState, useContext } from 'react';
-import axios from 'axios';
-import { AppContext } from '../context/AppContext';
-import { toast } from 'react-toastify';
-
-export default function PostTeam() {
-=======
 
 
 import { useState, useContext } from 'react';
@@ -19,7 +10,6 @@ import { toast } from 'react-hot-toast';
 export default function PostTeam() {
   // console.log("Rendering PostTeam page...");
   const navigate = useNavigate();
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
   const { backendURL } = useContext(AppContext);
   const [form, setForm] = useState({
     hackathonName: '',
@@ -42,17 +32,9 @@ export default function PostTeam() {
         ...form,
         skillsRequired: form.skillsRequired.split(',').map(s => s.trim()),
       };
-<<<<<<< HEAD
-      const res = await axios.post(
-        `${backendURL}/problem/create-problem`,
-        payload,
-        { withCredentials: true }
-      );
-=======
       const res = await axios.post(`${backendURL}/problem/create-problem`, payload, {
         withCredentials: true,
       });
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
       if (res.data.success) {
         toast.success('Team posted!');
         setForm({
@@ -63,33 +45,15 @@ export default function PostTeam() {
           skillsRequired: '',
           description: '',
         });
-<<<<<<< HEAD
-=======
 
         // ✅ Navigate to home
         navigate('/');
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
       } else {
         toast.error(res.data.message);
       }
     } catch {
       toast.error('Failed to post team.');
     }
-<<<<<<< HEAD
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2>Post Hackathon Team</h2>
-      <input name="hackathonName" value={form.hackathonName} onChange={handleChange} placeholder="Hackathon Name" required/>
-      <input name="teamName" value={form.teamName} onChange={handleChange} placeholder="Team Name" required/>
-      <input name="membersRequired" type="number" value={form.membersRequired} onChange={handleChange} placeholder="Members Required" required/>
-      <input name="registrationDeadline" type="date" value={form.registrationDeadline} onChange={handleChange} required/>
-      <input name="skillsRequired" value={form.skillsRequired} onChange={handleChange} placeholder="Skills (comma separated)" required/>
-      <textarea name="description" value={form.description} onChange={handleChange} placeholder="Project Description" required/>
-      <button type="submit">Submit</button>
-    </form>
-=======
     
   };
 
@@ -155,6 +119,5 @@ export default function PostTeam() {
         </button>
       </form>
     </div>
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
   );
 }

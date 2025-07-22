@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// pages/Login.jsx
-=======
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -17,12 +13,8 @@ export default function Login() {
   const handleLogin = async e => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      const res = await axios.post(`${backendURL}/api/auth/login`,
-=======
       const res = await axios.post(
         `${backendURL}/api/auth/login`,
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
         { email, password },
         { withCredentials: true }
       );
@@ -40,22 +32,6 @@ export default function Login() {
   };
 
   return (
-<<<<<<< HEAD
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      <input
-        type="email" value={email}
-        onChange={e => setEmail(e.target.value)}
-        placeholder="Email" required
-      />
-      <input
-        type="password" value={password}
-        onChange={e => setPassword(e.target.value)}
-        placeholder="Password" required
-      />
-      <button type="submit">Login</button>
-    </form>
-=======
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <form
         onSubmit={handleLogin}
@@ -91,6 +67,5 @@ export default function Login() {
         </button>
       </form>
     </div>
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
   );
 }
