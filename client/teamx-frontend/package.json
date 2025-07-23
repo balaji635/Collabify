@@ -14,34 +14,22 @@
     "axios": "^1.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-<<<<<<< HEAD
-    "react-router-dom": "^7.6.3",
-    "react-toastify": "^11.0.5",
-    "tailwindcss": "^4.1.11"
-=======
     "react-hot-toast": "^2.5.2",
     "react-router-dom": "^7.6.3",
     "react-toastify": "^11.0.5"
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
-<<<<<<< HEAD
-=======
     "autoprefixer": "^10.4.21",
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
     "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
-<<<<<<< HEAD
-=======
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.11",
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
     "vite": "^7.0.4"
   }
 }

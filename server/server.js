@@ -11,10 +11,6 @@ const problemRoutes = require('./routes/problemRoutes');
 const app = express();
 const port = process.env.PORT || 4000;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6675f71 (Add team posting logic and update backend problem controller)
 connectDB();
 
 app.use(cookieParser());

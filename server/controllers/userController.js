@@ -70,7 +70,7 @@ exports.getLogin =async(req,res)=>{
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
-        return res.json({ success: true, message: "Login Successful" });
+        return res.json({ success: true, message: "Login Successful" ,user});
 
         // return res.json({success:true,message:"Login Successful"})
 

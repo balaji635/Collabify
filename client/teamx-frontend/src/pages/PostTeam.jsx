@@ -1,5 +1,3 @@
-
-
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { AppContext } from '../context/AppContext';
@@ -7,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 
-export default function PostTeam() {
+export default function PostTeam({ onPostSuccess }) {
   // console.log("Rendering PostTeam page...");
   const navigate = useNavigate();
   const { backendURL } = useContext(AppContext);
@@ -45,15 +43,17 @@ export default function PostTeam() {
           skillsRequired: '',
           description: '',
         });
-
-        // ✅ Navigate to home
+        if (onPostSuccess) onPostSuccess(); // Trigger refetch
         navigate('/');
       } else {
-        toast.error(res.data.message);
+        console.error("Error posting team:", res.data.message);
+        toast.error(res.data.message || 'Failed to post team.');
+         
       }
-    } catch {
-      toast.error('Failed to post team.');
-    }
+    }  catch (err) {
+      console.error("Error in handleSubmit:", err);
+      toast.error(err.response?.data?.message || 'An error occurred while posting the team.');  
+}
     
   };
 
