@@ -8,6 +8,10 @@ export default function Home() {
   const [problems, setProblems] = useState([]);
   const [loading, setLoading] = useState(true);
   
+
+  const handleViewDetails = (id) => {
+  navigate(`/details/${id}`);
+};
   
 
   const fetchProblems = async () => {
@@ -118,13 +122,22 @@ export default function Home() {
               </p>
 
               {isOwner && (
-                <button
-                  onClick={() => handleDelete(p._id)}
-                  className="mt-4 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                >
-                  Delete
-                </button>
-              )}
+                    <div className="mt-4 flex gap-3">
+                      <button
+                        onClick={() => handleDelete(p._id)}
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => handleViewDetails(p._id)}
+                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  )}
+
             </div>
           );
         })}
