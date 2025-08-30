@@ -3,11 +3,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import { toast } from 'react-toastify';
+// import { set } from 'mongoose';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setIsLogin, setUserData, backendURL } = useContext(AppContext);
+  const { setIsLogin, setUserData, backendURL,setUserName } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleLogin = async e => {
@@ -21,6 +22,7 @@ export default function Login() {
       if (res.data.success) {
         setIsLogin(true);
         setUserData(res.data.user);
+        setUserName(res.data.user.name);
         toast.success('Login successful');
         navigate('/');
       } else {
