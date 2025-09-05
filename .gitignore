@@ -5,6 +5,7 @@
 # 2) Ignore nested client artifacts
 /client/teamx-frontend/node_modules/
 /client/teamx-frontend/.env
+/client/teamx-frontend/.env
 
 # (Optional) If you ever rename the folder, you can use:
 /client/**/node_modules/
