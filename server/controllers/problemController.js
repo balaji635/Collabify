@@ -92,16 +92,4 @@ exports.deleteProblem = async (req, res) => {
 };
 
 
-// exports.getYourProblems = async (req, res) => {
-//   try {
-//     const userId = req.user._id;
-//     const problems = await Problem.find({ createdBy: userId })
-//       .populate('createdBy', 'name email')
-//       .sort({ createdAt: -1 });
 
-//     return res.json({ success: true, data: problems });
-//   } catch (err) {
-//     console.error("Error in getYourProblems:", err);
-//     return res.status(500).json({ success: false, message: "Internal server error." });
-//   }
-// };
