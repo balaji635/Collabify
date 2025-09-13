@@ -14,8 +14,7 @@ export default function ChatPage() {
     try {
       const res = await axios.get(`${backendURL}/chat/my-chats`, { withCredentials: true });
       if (res.data.success) setChats(res.data.chats);
-    } catch (err) {
-      console.error(err);
+    } catch {
       toast.error("Failed to fetch chats");
     }
   };
@@ -24,45 +23,34 @@ export default function ChatPage() {
     try {
       const res = await axios.get(`${backendURL}/chat/messages/${chatId}`, { withCredentials: true });
       if (res.data.success) setMessages(res.data.messages);
-    } catch (err) {
-      console.error(err);
+    } catch {
       toast.error("Failed to fetch messages");
     }
   };
 
-  // FIXED: Send message function
   const sendMessage = async () => {
     if (!newMsg.trim() || !selectedChat) return;
-    
     try {
       const res = await axios.post(
         `${backendURL}/chat/message`,
         { chatId: selectedChat._id, content: newMsg.trim() },
         { withCredentials: true }
       );
-      
       if (res.data.success) {
         setMessages(prev => [...prev, res.data.message]);
         setNewMsg("");
-        
-        // Emit socket event for real-time messaging
-        if (socket) {
-          socket.emit("sendMessage", { 
-            chatId: selectedChat._id, 
-            message: res.data.message 
-          });
-        }
+        socket?.emit("sendMessage", {
+          chatId: selectedChat._id,
+          message: res.data.message
+        });
       }
     } catch (err) {
-      console.error(err);
-      const errorMsg = err.response?.data?.message || "Failed to send message";
-      toast.error(errorMsg);
+      toast.error(err.response?.data?.message || "Failed to send message");
     }
   };
 
-  // FIXED: Handle Enter key press
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+  const handleKeyPress = e => {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
     }
@@ -70,96 +58,106 @@ export default function ChatPage() {
 
   useEffect(() => {
     fetchChats();
+    setUnreadMessages(0);
   }, []);
 
-  // Receive messages in real-time
   useEffect(() => {
     if (!socket) return;
-    
-    const handleMessage = (msg) => {
-      if (selectedChat && msg.chatId === selectedChat._id) {
+    const handleMessage = msg => {
+      if (selectedChat?._id === msg.chatId) {
         setMessages(prev => [...prev, msg]);
       }
     };
-    
     socket.on("receiveMessage", handleMessage);
     return () => socket.off("receiveMessage", handleMessage);
   }, [socket, selectedChat]);
 
-  useEffect(() => {
-    setUnreadMessages(0); // reset badge when page is open
-  }, []);
-
-  // FIXED: Get chat name helper function
-  const getChatName = (chat) => {
-    if (!chat.users || chat.users.length === 0) return "Unknown Chat";
-    
-    // Find the other user (not current user)
-    const otherUser = chat.users.find(user => user._id !== userData?._id);
-    return otherUser ? otherUser.name : "Unknown User";
+  const getChatName = chat => {
+    const other = chat.users.find(u => u._id !== userData?._id);
+    return other?.name || "Unknown Chat";
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6 flex gap-6">
-      <div className="w-1/3 border border-gray-200 rounded p-4">
-        <h3 className="font-bold mb-4">Chats</h3>
-        {chats.length === 0 ? (
-          <p className="text-gray-500 text-sm">No chats yet. Accept requests to start chatting!</p>
-        ) : (
-          chats.map(chat => (
-            <div
-              key={chat._id}
-              className={`p-2 cursor-pointer rounded hover:bg-gray-100 ${
-                selectedChat?._id === chat._id ? "bg-gray-200" : ""
-              }`}
-              onClick={() => {
-                setSelectedChat(chat);
-                fetchMessages(chat._id);
-              }}
-            >
-              {getChatName(chat)}
-            </div>
-          ))
-        )}
-      </div>
-
-      <div className="flex-1 border border-gray-200 rounded p-4 flex flex-col h-[500px]">
-        <h3 className="font-bold mb-4">
-          {selectedChat ? getChatName(selectedChat) : "Select a chat"}
-        </h3>
-        
-        <div className="flex-1 overflow-y-auto mb-2 space-y-2">
-          {messages.map(msg => (
-            <div key={msg._id} className={`${msg.sender._id === userData._id ? 'text-right' : 'text-left'}`}>
-              <span className={`inline-block p-2 rounded ${msg.sender._id === userData._id ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>
-                {msg.content}
-              </span>
-            </div>
-          ))}
-        </div>
-        
-        {selectedChat && (
-          <div className="flex gap-2">
-            <input
-              value={newMsg}
-              onChange={e => setNewMsg(e.target.value)}
-              onKeyPress={handleKeyPress}
-              className="flex-1 border px-3 py-2 rounded focus:outline-none focus:border-blue-500"
-              placeholder="Type a message..."
-            />
-            <button 
-              onClick={sendMessage} 
-              disabled={!newMsg.trim()}
-              className={`px-4 rounded text-white ${
-                !newMsg.trim() 
-                  ? 'bg-gray-400 cursor-not-allowed' 
-                  : 'bg-blue-600 hover:bg-blue-700'
-              }`}
-            >
-              Send
-            </button>
+ <div className="h-[calc(100vh-4rem)] bg-slate-900 pt-4 pb-6">
+      {/* Subtract navbar height (e.g. 4rem) */}
+      <div className="max-w-5xl mx-auto h-full flex gap-6 px-4">
+        {/* Chats List */}
+        <div className="w-1/3 bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-lg flex flex-col">
+          <h3 className="text-slate-200 font-bold mb-4">Chats</h3>
+          <div className="flex-1 overflow-y-auto space-y-2">
+            {chats.length === 0 ? (
+              <p className="text-slate-400 text-sm">No chats yet. Accept requests to start chatting!</p>
+            ) : (
+              chats.map(chat => (
+                <div
+                  key={chat._id}
+                  onClick={() => {
+                    setSelectedChat(chat);
+                    fetchMessages(chat._id);
+                  }}
+                  className={`p-3 rounded-lg cursor-pointer transition ${
+                    selectedChat?._id === chat._id
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-700 text-slate-200 hover:bg-slate-600"
+                  }`}
+                >
+                  {getChatName(chat)}
+                </div>
+              ))
+            )}
           </div>
-        )}
+        </div>
+
+        {/* Chat Window */}
+        <div className="flex-1 flex flex-col bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-lg">
+          <h3 className="text-slate-200 font-bold mb-4">
+            {selectedChat ? getChatName(selectedChat) : "Select a chat"}
+          </h3>
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto mb-4 space-y-3 px-2">
+            {messages.map(msg => (
+              <div
+                key={msg._id}
+                className={`flex ${msg.sender._id === userData._id ? "justify-end" : "justify-start"}`}
+              >
+                <span
+                  className={`max-w-[75%] px-4 py-2 rounded-2xl ${
+                    msg.sender._id === userData._id
+                      ? "bg-blue-500 text-white"
+                      : "bg-slate-700 text-slate-200"
+                  }`}
+                >
+                  {msg.content}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Input */}
+          {selectedChat && (
+            <div className="flex gap-2">
+              <textarea
+                value={newMsg}
+                onChange={e => setNewMsg(e.target.value)}
+                onKeyDown={handleKeyPress}
+                rows={1}
+                placeholder="Type a message..."
+                className="flex-1 resize-none bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+              />
+              <button
+                onClick={sendMessage}
+                disabled={!newMsg.trim()}
+                className={`px-6 py-3 rounded-lg font-medium transition ${
+                  newMsg.trim()
+                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                    : "bg-slate-600 text-slate-400 cursor-not-allowed"
+                }`}
+              >
+                Send
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

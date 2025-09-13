@@ -3,7 +3,7 @@ const Message = require("../model/messageModel");
 const Request = require("../model/requestModel");
 const Post = require("../model/problemModel");
 
-// Send Request - FIXED to avoid duplicate requests to same user
+// Send Request - FIXED to allow multiple requests to same user for different posts
 exports.sendRequest = async (req, res) => {
   try {
     const { postId } = req.body;
@@ -18,15 +18,15 @@ exports.sendRequest = async (req, res) => {
       return res.status(400).json({ success: false, message: "You cannot request your own post" });
     }
 
-    // Check if already requested to this user (regardless of post)
+    // Check if already requested for this SPECIFIC POST (not user)
     const existing = await Request.findOne({
       from: req.user._id,
-      to: post.createdBy._id,
+      post: post._id,
       status: "pending"
     });
 
     if (existing) {
-      return res.status(400).json({ success: false, message: "You already have a pending request to this user" });
+      return res.status(400).json({ success: false, message: "You already have a pending request for this post" });
     }
 
     const request = await Request.create({
