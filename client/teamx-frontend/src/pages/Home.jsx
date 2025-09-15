@@ -97,13 +97,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-900 relative overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 md:px-6 py-6">
-        {/* Header */}
+       
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-slate-200 mb-4">Hackathon Posts</h2>
           <p className="text-slate-500 text-lg">Discover amazing projects and find your next team</p>
         </div>
 
-        {/* Cards container */}
         <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-start">
           {problems.map((post) => {
             const isOwner = userData?._id === post.createdBy._id;

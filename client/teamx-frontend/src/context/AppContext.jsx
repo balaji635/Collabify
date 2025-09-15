@@ -1,4 +1,4 @@
-// context/AppContext.jsx
+
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -14,13 +14,12 @@ export const AppContextProvider = ({ children }) => {
   const [username, setUserName] = useState("");
   const [socket, setSocket] = useState(null);
 
-  // 🔹 unread counts
+ 
   const [unreadRequests, setUnreadRequests] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
 
   axios.defaults.withCredentials = true;
 
-  // 🔹 Check login
   const checkLogin = async () => {
     try {
       const res = await axios.get(`${backendURL}/api/auth/verify`);
@@ -38,7 +37,7 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-  // 🔹 Logout
+  
   const logout = async () => {
     try {
       await axios.get(`${backendURL}/api/auth/logout`);

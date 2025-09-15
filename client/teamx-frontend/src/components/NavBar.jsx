@@ -1,4 +1,4 @@
-// components/NavBar.jsx
+
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
@@ -21,7 +21,7 @@ export default function NavBar() {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-cyan-500/30 shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          {/* Logo */}
+      
           <div className="flex items-center">
             <div className="relative mr-2">
               <div className="absolute inset-0 bg-cyan-400/30 rounded-md blur-sm"></div>
@@ -39,7 +39,6 @@ export default function NavBar() {
             </span>
           </div>
 
-          {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-6">
             {isLogin ? (
               <>
@@ -119,7 +118,7 @@ export default function NavBar() {
                   )}
                 </NavLink>
 
-                {/* Logout button */}
+           
                 <div className="ml-4">
                   <button
                     onClick={logout}
@@ -141,7 +140,7 @@ export default function NavBar() {
         </div>
       </nav>
 
-      {/* Spacer */}
+  
       <div className="h-16"></div>
     </>
   );
