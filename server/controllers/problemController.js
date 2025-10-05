@@ -2,9 +2,7 @@
 
 const Problem = require('../model/problemModel');
 
-/**
- * Create a new problem statement
- */
+
 exports.createStatement = async (req, res) => {
   try {
     const {
@@ -16,18 +14,18 @@ exports.createStatement = async (req, res) => {
       description
     } = req.body;
 
-    // Validate required fields
+   
     if (!hackathonName || !teamName || !membersRequired || !registrationDeadline || !skillsRequired || !description) {
       return res.status(400).json({ success: false, message: "All fields are required." });
     }
 
-    // Check for existing team
+  
     const existingTeam = await Problem.findOne({ teamName: teamName.toUpperCase() });
     if (existingTeam) {
       return res.status(400).json({ success: false, message: "Team with this name already exists." });
     }
 
-    // Create new problem
+  
     const problem = new Problem({
       hackathonName,
       teamName: teamName.toUpperCase(),
@@ -46,9 +44,7 @@ exports.createStatement = async (req, res) => {
   }
 };
 
-/**
- * Get all problems
- */
+
 exports.getAllProblems = async (req, res) => {
   try {
     const problems = await Problem
@@ -63,9 +59,7 @@ exports.getAllProblems = async (req, res) => {
   }
 };
 
-/**
- * Delete a problem
- */
+
 exports.deleteProblem = async (req, res) => {
   try {
     const postId = req.params.id;
@@ -77,12 +71,12 @@ exports.deleteProblem = async (req, res) => {
       return res.status(404).json({ success: false, message: "Post not found." });
     }
 
-    // Check ownership
+   
     if (post.createdBy.toString() !== userId.toString()) {
       return res.status(403).json({ success: false, message: "Unauthorized." });
     }
 
-    // Delete the post
+    
     await Problem.findByIdAndDelete(postId);
     return res.json({ success: true, message: "Post deleted successfully." });
   } catch (err) {

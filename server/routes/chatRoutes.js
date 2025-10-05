@@ -21,7 +21,7 @@ router.post("/requests/:id/accept", authMiddleware, acceptRequest); // FIXED: se
 router.post("/requests/:id/reject", authMiddleware, rejectRequest); // FIXED: separate reject endpoint
 router.delete("/requests/:id", authMiddleware, cancelRequest);
 
-// Chat routes
+
 router.get("/my-chats", authMiddleware, getMyChats);
 router.get("/messages/:chatId", authMiddleware, getMessages);
 router.post("/message", authMiddleware, sendMessage); // FIXED: This handles message sending

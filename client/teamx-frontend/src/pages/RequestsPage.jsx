@@ -76,12 +76,11 @@ export default function RequestsPage() {
                 key={r._id}
                 className="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-lg hover:shadow-xl transition relative"
               >
-                {/* Badge */}
+                
                 <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs px-2 py-1 rounded-full z-10">
                   {r.from.name}
                 </div>
 
-                {/* Hackathon Post */}
                 <div className="mb-4">
                   <h3 className="text-xl font-bold text-slate-200 mb-2">
                     {r.post?.hackathonName || "Unknown Hackathon"}
@@ -115,7 +114,7 @@ export default function RequestsPage() {
                   </p>
                 </div>
 
-                {/* Request Info */}
+               
                 <div className="mb-4 p-4 bg-slate-700 rounded-lg">
                   <p className="text-slate-200 text-sm">
                     <span className="font-semibold">{r.from.name}</span> wants to join
@@ -123,7 +122,7 @@ export default function RequestsPage() {
                   <p className="text-slate-400 text-xs mt-1">Email: {r.from.email}</p>
                 </div>
 
-                {/* Actions */}
+             
                 <div className="flex gap-3">
                   <button
                     onClick={() => handleAccept(r._id)}

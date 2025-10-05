@@ -13,7 +13,7 @@ exports.authMiddleware = async (req, res, next) => {
       return res.status(401).json({ success: false, message: "Unauthorized: Invalid token" });
     }
 
-    req.user = { _id: decoded.id }; // ✅ set authenticated user
+    req.user = { _id: decoded.id };
     next();
   } catch (error) {
     return res.status(401).json({ success: false, message: "Token verification failed" });

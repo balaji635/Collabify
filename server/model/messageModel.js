@@ -11,7 +11,7 @@ const messageSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  // FIXED: Changed from "text" to "content" to match frontend
+  //  Changed from "text" to "content" to match frontend
   content: { type: String, required: true }
 }, { timestamps: true });
 

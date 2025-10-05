@@ -9,14 +9,13 @@ const problemSchema = new mongoose.Schema({
   description:         { type: String, default: "" },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',     // <-- must match the User model name exactly
+    ref: 'User',     // must match the User model name exactly
     required: true,
   },
 }, {
   timestamps: true
 });
 
-// Register the model under the singular, capitalized name "Problem"
 const Problem = mongoose.models.Problem || mongoose.model('Problem', problemSchema);
 
 module.exports = Problem;

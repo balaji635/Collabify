@@ -28,12 +28,12 @@ app.get("/", (req, res) => {
   res.json({ message: "Server is running" });
 });
 
-// Routes
+
 app.use("/api/auth", authRoutes);
 app.use("/problem", problemRoutes);
 app.use("/chat", chatRoutes);
 
-// 🔥 Socket.IO - FIXED
+// Socket.IO - FIXED
 const io = new Server(server, {
   cors: {
     origin: ["http://localhost:5173"],
@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
     console.log(`User ${socket.id} joined chat ${chatId}`);
   });
 
-  // FIXED: Handle message sending via socket
+  // Handle message sending via socket
   socket.on("sendMessage", ({ chatId, message }) => {
     // Just broadcast the message to the chat room
     // Don't create a new message here - that's handled by the API endpoint

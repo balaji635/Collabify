@@ -56,16 +56,16 @@ export default function PostTeam({ onPostSuccess }) {
   return (
     <div className="min-h-screen bg-slate-900 relative overflow-hidden">
       <div className="w-full max-w-4xl mx-auto px-4 md:px-6 py-6">
-        {/* Header */}
+   
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-slate-200 mb-4">Post Hackathon Team</h2>
           <p className="text-slate-500 text-lg">Create your hackathon post and find the perfect teammates</p>
         </div>
 
-        {/* Form Container */}
+      
         <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Row 1 - Hackathon Name & Team Name */}
+          
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-slate-300 text-sm font-medium mb-2">
@@ -95,7 +95,7 @@ export default function PostTeam({ onPostSuccess }) {
               </div>
             </div>
 
-            {/* Row 2 - Members Required & Deadline */}
+           
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-slate-300 text-sm font-medium mb-2">
@@ -128,7 +128,7 @@ export default function PostTeam({ onPostSuccess }) {
               </div>
             </div>
 
-            {/* Skills Required */}
+            
             <div>
               <label className="block text-slate-300 text-sm font-medium mb-2">
                 Skills Required
@@ -144,7 +144,7 @@ export default function PostTeam({ onPostSuccess }) {
               <p className="text-slate-400 text-sm mt-1">Separate skills with commas</p>
             </div>
 
-            {/* Description */}
+            
             <div>
               <label className="block text-slate-300 text-sm font-medium mb-2">
                 Project Description
@@ -160,7 +160,7 @@ export default function PostTeam({ onPostSuccess }) {
               />
             </div>
 
-            {/* Submit Button */}
+           
             <div className="pt-4">
               <button
                 type="submit"
@@ -187,7 +187,7 @@ export default function PostTeam({ onPostSuccess }) {
           </form>
         </div>
 
-        {/* Help Text */}
+       
         <div className="text-center mt-8">
           <p className="text-slate-400 text-sm">
             Need help? Check out our{' '}

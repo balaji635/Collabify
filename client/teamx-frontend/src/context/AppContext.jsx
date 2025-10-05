@@ -50,7 +50,7 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-  // 🔹 Socket.io setup
+  // Socket.io setup
   useEffect(() => {
     if (userData?._id) {
       const s = io(backendURL);

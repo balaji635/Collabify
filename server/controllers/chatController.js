@@ -3,7 +3,7 @@ const Message = require("../model/messageModel");
 const Request = require("../model/requestModel");
 const Post = require("../model/problemModel");
 
-// Send Request - FIXED to allow multiple requests to same user for different posts
+
 exports.sendRequest = async (req, res) => {
   try {
     const { postId } = req.body;
@@ -13,12 +13,12 @@ exports.sendRequest = async (req, res) => {
       return res.status(404).json({ success: false, message: "Post not found" });
     }
 
-    // Prevent self-request
+   
     if (post.createdBy._id.toString() === req.user._id.toString()) {
       return res.status(400).json({ success: false, message: "You cannot request your own post" });
     }
 
-    // Check if already requested for this SPECIFIC POST (not user)
+    
     const existing = await Request.findOne({
       from: req.user._id,
       post: post._id,
@@ -47,7 +47,7 @@ exports.sendRequest = async (req, res) => {
   }
 };
 
-// Accept request & create chat - FIXED
+
 exports.acceptRequest = async (req, res) => {
   try {
     const request = await Request.findById(req.params.id);
@@ -80,7 +80,7 @@ exports.acceptRequest = async (req, res) => {
   }
 };
 
-// Reject request - FIXED
+
 exports.rejectRequest = async (req, res) => {
   try {
     const request = await Request.findById(req.params.id);
@@ -114,7 +114,7 @@ exports.getRequests = async (req, res) => {
   }
 };
 
-// Get sent requests - FIXED
+
 exports.getSentRequests = async (req, res) => {
   try {
     const requests = await Request.find({ from: req.user._id, status: "pending" })
@@ -129,7 +129,7 @@ exports.getSentRequests = async (req, res) => {
   }
 };
 
-// Get chats for logged-in user - FIXED
+
 exports.getMyChats = async (req, res) => {
   try {
     const chats = await Chat.find({ users: req.user._id }).populate("users", "name email");
@@ -140,7 +140,7 @@ exports.getMyChats = async (req, res) => {
   }
 };
 
-// Send message - FIXED
+
 exports.sendMessage = async (req, res) => {
   try {
     const { chatId, content } = req.body;
@@ -164,7 +164,7 @@ exports.sendMessage = async (req, res) => {
   }
 };
 
-// Get messages for chat - FIXED
+
 exports.getMessages = async (req, res) => {
   try {
     const messages = await Message.find({ chat: req.params.chatId })
@@ -178,7 +178,7 @@ exports.getMessages = async (req, res) => {
   }
 };
 
-// Cancel/unsend a request - FIXED
+// Cancel/unsend a request 
 exports.cancelRequest = async (req, res) => {
   try {
     const request = await Request.findById(req.params.id);

@@ -79,9 +79,9 @@ export default function ChatPage() {
 
   return (
  <div className="h-[calc(100vh-4rem)] bg-slate-900 pt-4 pb-6">
-      {/* Subtract navbar height (e.g. 4rem) */}
+     
       <div className="max-w-5xl mx-auto h-full flex gap-6 px-4">
-        {/* Chats List */}
+        
         <div className="w-1/3 bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-lg flex flex-col">
           <h3 className="text-slate-200 font-bold mb-4">Chats</h3>
           <div className="flex-1 overflow-y-auto space-y-2">
@@ -108,12 +108,12 @@ export default function ChatPage() {
           </div>
         </div>
 
-        {/* Chat Window */}
+       
         <div className="flex-1 flex flex-col bg-slate-800 border border-slate-700 rounded-2xl p-4 shadow-lg">
           <h3 className="text-slate-200 font-bold mb-4">
             {selectedChat ? getChatName(selectedChat) : "Select a chat"}
           </h3>
-          {/* Messages */}
+          
           <div className="flex-1 overflow-y-auto mb-4 space-y-3 px-2">
             {messages.map(msg => (
               <div
@@ -133,7 +133,7 @@ export default function ChatPage() {
             ))}
           </div>
 
-          {/* Input */}
+          
           {selectedChat && (
             <div className="flex gap-2">
               <textarea

@@ -8,12 +8,12 @@ export default function Home() {
   const { backendURL, userData, socket } = useContext(AppContext);
   const [problems, setProblems] = useState([]);
   const [loading, setLoading] = useState(true);
-  // Store request status for each specific post
+ 
   const [requestStatus, setRequestStatus] = useState({});
 
   const navigate = useNavigate();
 
-  // fetch all hackathon posts
+  
   const fetchProblems = async () => {
     setLoading(true);
     try {
@@ -48,7 +48,7 @@ export default function Home() {
     }
   };
 
-  // send request
+
   const handleRequest = async (post) => {
     // Check if already sent request for this specific post
     if (requestStatus[post._id]?.sent) {

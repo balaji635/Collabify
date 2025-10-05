@@ -23,6 +23,6 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Register under the name "User"
+
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 module.exports = User;

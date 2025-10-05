@@ -58,12 +58,12 @@ export default function SentRequestsPage() {
                 key={r._id}
                 className="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-lg hover:shadow-xl transition relative"
               >
-                {/* Status Badge */}
+               
                 <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs px-2 py-1 rounded-full z-10">
                   Sent to {r.to.name}
                 </div>
 
-                {/* Post Details */}
+                
                 <div className="mb-4">
                   <h3 className="text-xl font-bold text-slate-200 mb-2">
                     {r.post?.hackathonName || "Unknown Hackathon"}
@@ -97,7 +97,7 @@ export default function SentRequestsPage() {
                   </p>
                 </div>
 
-                {/* Request Info */}
+               
                 <div className="mb-4 p-4 bg-slate-700 rounded-lg">
                   <p className="text-slate-200 text-sm">
                     Request sent to <span className="font-semibold">{r.to.name}</span>
@@ -108,7 +108,7 @@ export default function SentRequestsPage() {
                   </p>
                 </div>
 
-                {/* Cancel Button */}
+              
                 <button
                   onClick={() => cancelRequest(r._id)}
                   className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-2 rounded-lg shadow-md shadow-red-900/40 hover:from-red-500 hover:to-red-600 transition flex items-center justify-center gap-2"
